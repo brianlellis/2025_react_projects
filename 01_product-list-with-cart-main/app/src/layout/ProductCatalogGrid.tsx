@@ -34,7 +34,7 @@ function ProductCard({ product }) {
       <img 
         src={`/images/${product.image.desktop}`} 
         alt={product.name}
-        className="w-full h-48 rounded-lg mb-[40px]"
+        className="w-full h-48 rounded-lg mb-[40px] object-fill"
       />
       {product.id ? <ProductAmountSelector /> : <ProductAddToCart />}
     </div>
@@ -50,6 +50,7 @@ function ProductCard({ product }) {
 export function ProductCatalogGrid({
   products = [],
   columns = 3,
+  className
 }) {
   const [cssColumn, setCssColumn] = useState("grid-cols-3 gap-4")
 
@@ -64,7 +65,7 @@ export function ProductCatalogGrid({
   }, [columns])
 
 
-  return (<div className={`grid ${cssColumn}`}>
+  return (<div className={`grid ${cssColumn} ${className}`}>
     {products.map((prod, i) => {
       return (<ProductCard key={`prod-grid-${i}`} product={prod} />) 
     })}
