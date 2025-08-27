@@ -24,7 +24,6 @@ function App() {
             path="/"
             element={<AuthGuard><PageHome /></AuthGuard>} />*/}
           <Route path="/" element={<PageHome />} />
-
         </Routes>
       </div>
       <Toaster />
