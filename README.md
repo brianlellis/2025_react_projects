@@ -1,16 +1,16 @@
 # Purpose
 
-Apparrently, you're not a real engineer unless you put a bunch of code up for others
-to see and judge. As all of my work in my career as has been IP and NDA protected I
-generally don't have much of that code.
+Apparently, you're not a real engineer unless you put a bunch of code up for others 
+to see and judge, and since all of my work in my career has been IP and NDA protected, 
+I generally don't have much of that code.
 
-I also spend an incredible amount of time working on my employer's code. I don't have
-much free time to just code for myself and it not be in maintenance hell. So, every
-couple years I get a break and push up code to feed whatever Eldritch behemoth is required
-to be considered a 'real developer'...
+I also spend an incredible amount of time working on my employer's code. I don't have 
+much free time to just code for myself without it becoming a maintenance nightmare. 
+So, every couple years I get a break and push up code to feed whatever Eldritch 
+behemoth is required to be considered a 'real developer'...
 
-...not that successfully engineering projects over 20+ languages and tech stacks over
-the years could prove that.
+...not that successfully engineering projects over 20+ languages and tech stacks 
+over the years could prove that.
 
 
 ## Scaffolders
