@@ -21,7 +21,7 @@ over the years could prove that.
 cp -R _scaffold_tsz {NEW_PROJECT}
 ```
 
-### tsz (Tailwind, Radix, Redux)
+### trr (Tailwind, Radix, Redux)
 
 ```
 cp -R _scaffold_trr {NEW_PROJECT}
