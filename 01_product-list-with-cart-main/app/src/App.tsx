@@ -6,7 +6,7 @@ import { Toaster }                          from 'sonner'
 
 import { queryClient }                      from './lib/queryClient'
 import { AuthGuard }                        from './components/auth/AuthGuard'
-import { ThemeProvider }                    from './components/ThemeProvider'
+
 import { 
   PageHome,
 }      from './pages'
@@ -14,23 +14,21 @@ import {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
-        <div>
-          <Routes>
-            {/* Public routes */}
-            {/*<Route path="/auth/*" element={<PageAuthorization />} />*/}
-            
-            {/* Protected routes */}
-            {/*<Route 
-              path="/"
-              element={<AuthGuard><PageHome /></AuthGuard>} />*/}
-            <Route path="/" element={<PageHome />} />
+      <div>
+        <Routes>
+          {/* Public routes */}
+          {/*<Route path="/auth/*" element={<PageAuthorization />} />*/}
+          
+          {/* Protected routes */}
+          {/*<Route 
+            path="/"
+            element={<AuthGuard><PageHome /></AuthGuard>} />*/}
+          <Route path="/" element={<PageHome />} />
 
-          </Routes>
-        </div>
-        <Toaster />
-        <ReactQueryDevtools initialIsOpen={false} />
-      </ThemeProvider>
+        </Routes>
+      </div>
+      <Toaster />
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }
