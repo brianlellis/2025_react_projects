@@ -12,6 +12,14 @@ behemoth is required to be considered a 'real developer'...
 ...not that successfully engineering projects over 20+ languages and tech stacks 
 over the years could prove that.
 
+## Organization
+
+```
+[0-9]+_{PROJECT_NAME}
+ |
+ |--> app (the actual code)
+ |--> feature_specs (brd/fsd, general info, etc.)
+```
 
 ## Scaffolders
 
