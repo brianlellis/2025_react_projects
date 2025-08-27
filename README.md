@@ -37,9 +37,23 @@ https://github.com/kriasoft/react-starter-kit/tree/3cffb5fda0bd8fed2f9278d975c7b
 cp -R _scaffold_start {NEW_PROJECT}
 ```
 
+# Learning and Creating
+
+## Project Idea Sources
+
+- https://www.frontendmentor.io/challenges
+- https://weekendwebdev.substack.com/
+- https://github.com/practical-tutorials/project-based-learning#web-applications
+- https://github.com/codecrafters-io/build-your-own-x
+
 ## Considerations of learning
 
 - https://www.patterns.dev/
 - https://github.com/topics/epicreact-dev
 - https://micro-frontends.org/
 - https://scrimba.com/learn-react-c0e
+- https://www.theodinproject.com/paths
+
+## L33t and other mess
+
+- https://css-tricks.com/front-end-challenges/
