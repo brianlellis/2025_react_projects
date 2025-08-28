@@ -1,25 +1,51 @@
-import { cn } from "@/lib/utils"
+import { cn }                  from "@/lib/utils"
 import { useEffect, useState } from 'react'
-import { ShoppingCart } from 'lucide-react'
+import { ShoppingCart }        from 'lucide-react'
+import { useCartStore }        from '@/stores'
 
 
-function ProductAmountSelector() {
-  return (<div className="w-full">
-  </div>)
-}
-
-function ProductAddToCart() {
+function ProductAmountSelector({ product }) {
+  const incrementProduct = useCartStore(s => s.incrementProduct)
+  const decrementProduct = useCartStore(s => s.decrementProduct)
   const ICON_SZ = 14
 
   return (
       <div 
         className={cn(
+          "cursor-pointer",
+          "w-[150px] p-2 text-white bg-orange-700",
+          "border-1 rounded-full border-white",
+          `absolute left-0 right-0 mx-auto bottom-[-${ICON_SZ}px]`
+        )}
+      >
+        <div 
+          className="flex items-center m-auto w-[100px]"
+        >
+          <ShoppingCart size={ICON_SZ} />
+          <span className="ml-2 text-sm">Add to Cart</span>
+        </div>
+      </div>
+  )
+}
+
+function ProductAddToCart({ product }) {
+  const updateProduct = useCartStore(s => s.updateProduct)
+
+  const ICON_SZ = 14
+
+  return (
+      <div 
+        className={cn(
+          "cursor-pointer",
           "w-[150px] p-2 text-orange-700 bg-white",
           "border-1 rounded-full border-orange-700",
           `absolute left-0 right-0 mx-auto bottom-[-${ICON_SZ}px]`
         )}
       >
-        <div className="flex items-center m-auto w-[100px]">
+        <div 
+          className="flex items-center m-auto w-[100px]"
+          onClick={() => updateProduct(product)}
+        >
           <ShoppingCart size={ICON_SZ} />
           <span className="ml-2 text-sm">Add to Cart</span>
         </div>
@@ -29,6 +55,8 @@ function ProductAddToCart() {
 
 
 function ProductCard({ product }) {
+  const productsInCart = useCartStore(s => s.products)
+
   return (<div className="w-full text-center">
     <div className="relative">
       <img 
@@ -36,7 +64,8 @@ function ProductCard({ product }) {
         alt={product.name}
         className="w-full h-48 rounded-lg mb-[40px] object-fill"
       />
-      {product.id ? <ProductAmountSelector /> : <ProductAddToCart />}
+      {productsInCart[product.id] ? 
+        <ProductAmountSelector product={product} /> : <ProductAddToCart product={product} />}
     </div>
 
     <div className="text-left">
