@@ -1,6 +1,6 @@
 import { cn }                        from "@/lib/utils"
 import { useEffect, useState }       from 'react'
-import { ShoppingCart, Minus, Plus } from 'lucide-react'
+import { ShoppingCart, CircleMinus, CirclePlus } from 'lucide-react'
 import { useCartStore }              from '@/stores'
 
 
@@ -22,9 +22,9 @@ function ProductAmountSelector({ product }) {
           className="flex items-center justify-between m-auto w-[100px]"
         >
           
-          <Minus onClick={() => decrementProduct(product.id)} />
+          <CircleMinus size={16} onClick={() => decrementProduct(product.id)} />
           <span className="ml-2 text-sm">{product.amount}</span>
-          <Plus onClick={() => incrementProduct(product.id)} />
+          <CirclePlus size={16} onClick={() => incrementProduct(product.id)} />
         </div>
       </div>
   )
@@ -64,17 +64,17 @@ function ProductCard({ product }) {
       <img 
         src={`/images/${product.image.desktop}`} 
         alt={product.name}
-        className="w-full h-48 rounded-lg mb-[40px] object-fill"
+        className="w-full h-48 rounded-lg mb-[28px] object-fill"
       />
       {productsInCart[product.id] ? 
         <ProductAmountSelector product={productsInCart[product.id]} /> 
         : <ProductAddToCart product={product} />}
     </div>
 
-    <div className="text-left">
-      <h3>{product.category}</h3>
-      <h4 className="">{product.name}</h4>
-      <p>${product.price.toFixed(2)}</p>
+    <div className="text-left font-bold">
+      <h3 className="text-neutral-400 font-light text-sm">{product.category}</h3>
+      <h4 className="text-neutral-700">{product.name}</h4>
+      <p className="text-orange-700">${product.price.toFixed(2)}</p>
     </div>
   </div>)
 }
@@ -84,20 +84,19 @@ export function ProductCatalogGrid({
   columns = 3,
   className
 }) {
-  const [cssColumn, setCssColumn] = useState("grid-cols-3 gap-4")
+  const getCssColumn = () => {
+    switch(columns) {
+      case 4:
+        return "grid-cols-4 gap-x-3 gap-y-12"
+      case 5:
+        return "grid-cols-5 gap-x-2 gap-y-12"
+      case 3:
+      default:
+        return "grid-cols-3 gap-x-4 gap-y-12"
+    }
+  }
 
-
-  useEffect(() => {
-    if (columns === 3)
-      setCssColumn("grid-cols-3 gap-4")
-    else if (columns === 4)
-      setCssColumn("grid-cols-4 gap-3")
-    else if (columns === 5)
-      setCssColumn("grid-cols-5 gap-2")
-  }, [columns])
-
-
-  return (<div className={`grid ${cssColumn} ${className}`}>
+  return (<div className={`grid ${getCssColumn()} ${className}`}>
     {products.map((prod, i) => {
       return (<ProductCard key={`prod-grid-${i}`} product={prod} />) 
     })}
