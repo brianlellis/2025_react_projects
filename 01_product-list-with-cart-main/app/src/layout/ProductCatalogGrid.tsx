@@ -64,7 +64,10 @@ function ProductCard({ product }) {
       <img 
         src={`/images/${product.image.desktop}`} 
         alt={product.name}
-        className="w-full h-48 rounded-lg mb-[28px] object-fill"
+        className={cn(
+          "w-full h-48 rounded-lg mb-[28px] object-fill",
+          productsInCart[product.id] ? "border-2 border-orange-700" : ""
+        )}
       />
       {productsInCart[product.id] ? 
         <ProductAmountSelector product={productsInCart[product.id]} /> 

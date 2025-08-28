@@ -53,6 +53,11 @@ export const useCartStore = create<CartState>((set, get) => ({
     const { products } = get()
     return Object.values(products).reduce((total, product) => total + product.amount, 0)
   },
+  totalProductPricing: () => {
+    const { products } = get()
+    return Object.values(products).reduce((total, product) => 
+      total + (product.amount * product.price), 0)
+  },
   updateProduct: (product: CartProduct) => 
     set((s) => externUpdateProduct(s.products, product)),
   removeProduct: (id: number) => 
