@@ -1,5 +1,6 @@
 import { ProductCatalogGrid } from '@/layout'
 import { MockProductCatalog } from '@/data/mockProductCatalog'
+import { CartItemized } from '@/components/custom/CartItemized'
 
 export function PageHome() {
   return (
@@ -8,8 +9,8 @@ export function PageHome() {
 
       <div className="flex gap-2">
         <ProductCatalogGrid className="w-2/3" products={MockProductCatalog} />
-        <div>
-          <h1>Cart information</h1>
+        <div className="grow">
+          <CartItemized />
         </div>
       </div>
     </div>
