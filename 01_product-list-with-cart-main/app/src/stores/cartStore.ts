@@ -14,6 +14,7 @@ interface CartState {
   removeProduct     : (id: number) => void,
   incrementProduct  : (id: number) => void,
   decrementProduct  : (id: number) => void,
+  productsModified  : boolean,
 }
 
 /** 
@@ -23,16 +24,18 @@ interface CartState {
  * key, it doesn't align with the expected input for the set function, 
  * which is Partial<CartState>.
  */
-const externRemoveProduct = (products: Record<number, CartProduct>, id: number): 
-  Partial<CartState> => 
+const externRemoveProduct = (
+  products: Record<number, CartProduct>, id: number, modified: boolean): 
+    Partial<CartState> => 
 {
   const newProducts = { ...products }
   delete newProducts[id]
-  return ({ products: newProducts })
+  return ({ products: newProducts, productsModified: modified })
 }
 
-const externUpdateProduct = (products: Record<number, CartProduct>, product: CartProduct):
-  Partial<CartState> =>
+const externUpdateProduct = (
+  products: Record<number, CartProduct>, product: CartProduct, modified: boolean):
+    Partial<CartState> =>
 {
   return ({
     products: {
@@ -41,7 +44,8 @@ const externUpdateProduct = (products: Record<number, CartProduct>, product: Car
         ...product,
         amount: isNaN(product.amount) ? 1 : product.amount
       }
-    }
+    },
+    productsModified: modified
   })
 }
 
@@ -49,14 +53,15 @@ const externUpdateProduct = (products: Record<number, CartProduct>, product: Car
 export const useCartStore = create<CartState>((set, get) => ({
   // Initial state
   products: {},
+  productsModified: false,
   totalProductCount: () => {
     const { products } = get()
     return Object.values(products).reduce((total, product) => total + product.amount, 0)
   },
   updateProduct: (product: CartProduct) => 
-    set((s) => externUpdateProduct(s.products, product)),
+    set((s) => externUpdateProduct(s.products, product, !s.productsModified)),
   removeProduct: (id: number) => 
-    set((s) => externRemoveProduct(s.products, id)),
+    set((s) => externRemoveProduct(s.products, id, !s.productsModified)),
   incrementProduct: (id: number) => set((s) => {
     if (!s.products[id])
       return null // null prevents state update
@@ -64,7 +69,7 @@ export const useCartStore = create<CartState>((set, get) => ({
     return externUpdateProduct(s.products, {
       ...s.products[id],
       amount: s.products[id].amount + 1
-    })
+    }, !s.productsModified)
   }),
   decrementProduct: (id: number) => set((s) => {
     if (!s.products[id])
@@ -76,6 +81,6 @@ export const useCartStore = create<CartState>((set, get) => ({
     return externUpdateProduct(s.products, {
       ...s.products[id],
       amount: s.products[id].amount - 1
-    })
+    }, !s.productsModified)
   })
 }))
