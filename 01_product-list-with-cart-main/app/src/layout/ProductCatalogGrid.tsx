@@ -1,7 +1,7 @@
-import { cn }                  from "@/lib/utils"
-import { useEffect, useState } from 'react'
-import { ShoppingCart }        from 'lucide-react'
-import { useCartStore }        from '@/stores'
+import { cn }                        from "@/lib/utils"
+import { useEffect, useState }       from 'react'
+import { ShoppingCart, Minus, Plus } from 'lucide-react'
+import { useCartStore }              from '@/stores'
 
 
 function ProductAmountSelector({ product }) {
@@ -19,10 +19,12 @@ function ProductAmountSelector({ product }) {
         )}
       >
         <div 
-          className="flex items-center m-auto w-[100px]"
+          className="flex items-center justify-between m-auto w-[100px]"
         >
-          <ShoppingCart size={ICON_SZ} />
-          <span className="ml-2 text-sm">Add to Cart</span>
+          
+          <Minus onClick={() => decrementProduct(product.id)} />
+          <span className="ml-2 text-sm">{product.amount}</span>
+          <Plus onClick={() => incrementProduct(product.id)} />
         </div>
       </div>
   )
@@ -65,7 +67,8 @@ function ProductCard({ product }) {
         className="w-full h-48 rounded-lg mb-[40px] object-fill"
       />
       {productsInCart[product.id] ? 
-        <ProductAmountSelector product={product} /> : <ProductAddToCart product={product} />}
+        <ProductAmountSelector product={productsInCart[product.id]} /> 
+        : <ProductAddToCart product={product} />}
     </div>
 
     <div className="text-left">

@@ -37,7 +37,10 @@ const externUpdateProduct = (products: Record<number, CartProduct>, product: Car
   return ({
     products: {
       ...products,
-      [product.id]: product
+      [product.id]: {
+        ...product,
+        amount: isNaN(product.amount) ? 1 : product.amount
+      }
     }
   })
 }
